@@ -3,161 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>用户信息调查问卷</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>用户问卷调查</title>
   <link rel="stylesheet" href="main.css">
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>用户信息调查问卷</h1>
+      <h1>用户问卷调查</h1>
       <p>本问卷将帮助我们进行社会经济研究，感谢您的参与！</p>
     </div>
-
     <div class="progress-container">
       <div class="progress-bar" id="progressBar"></div>
     </div>
-
     <form id="surveyForm">
       <div class="survey-content">
-
-        <!-- 第1页：姓名、性别、年龄、民族 -->
+        <!-- 第1页 -->
         <div class="page" id="page1">
           <div class="question">
-            <div class="question-title"><i class="fas fa-user"></i>姓名（选填，默认匿名）</div>
+            <div class="question-title">姓名（选填，默认匿名）</div>
             <input type="text" name="name" placeholder="匿名">
           </div>
-          <div class="question select-other">
-            <div class="question-title"><i class="fas fa-venus-mars"></i>性别 <span class="required">*</span></div>
+          <div class="question">
+            <div class="question-title">性别 <span class="required">*</span></div>
             <select name="gender" required>
               <option value="">请选择</option>
-              <option value="male">男</option>
-              <option value="female">女</option>
-              <option value="other">其他</option>
+              <option value="男">男</option>
+              <option value="女">女</option>
+              <option value="其他">其他</option>
             </select>
-            <input type="text" placeholder="请输入性别（其他）" style="display:none;">
           </div>
           <div class="question">
-            <div class="question-title"><i class="fas fa-birthday-cake"></i>年龄 <span class="required">*</span></div>
+            <div class="question-title">年龄 <span class="required">*</span></div>
             <input type="number" name="age" min="0" max="120" required>
           </div>
-          <div class="question select-other">
-            <div class="question-title"><i class="fas fa-globe-asia"></i>民族 <span class="required">*</span></div>
+          <div class="question">
+            <div class="question-title">种族/民族 <span class="required">*</span></div>
             <select name="ethnicity" required>
               <option value="">请选择</option>
               <option value="汉族">汉族</option>
-              <option value="满族">满族</option>
+              <option value="蒙古族">蒙古族</option>
               <option value="回族">回族</option>
-              <option value="藏族">藏族</option>
-              <option value="维吾尔族">维吾尔族</option>
               <option value="其他">其他</option>
             </select>
-            <input type="text" placeholder="请输入民族（其他）" style="display:none;">
+            <input type="text" name="ethnicity_other" placeholder="若其他，请填写" data-unified-for="ethnicity">
           </div>
-
           <div class="buttons">
             <div></div>
-            <button type="button" class="btn-next" onclick="showPage(2)">下一页 <i class="fas fa-arrow-right"></i></button>
+            <button type="button" class="btn-next" onclick="validatePage(1)">下一页 <i class="fas fa-arrow-right"></i></button>
           </div>
-          <div class="page-indicator">第 1 页，共 4 页</div>
         </div>
 
-        <!-- 第2页：国家、省/州、城市 -->
+        <!-- 第2页 -->
         <div class="page" id="page2" style="display:none">
-          <div class="question select-other">
-            <div class="question-title"><i class="fas fa-flag"></i>国家 <span class="required">*</span></div>
-            <select name="country" id="country" required>
-              <option value="unknown" selected>未知</option>
+          <div class="question">
+            <div class="question-title">国家 <span class="required">*</span></div>
+            <select id="countrySelect" name="country" required>
+              <option value="未知">未知</option>
               <option value="中国">中国</option>
               <option value="美国">美国</option>
               <option value="澳大利亚">澳大利亚</option>
               <option value="德国">德国</option>
               <option value="其他">其他</option>
             </select>
-            <input type="text" placeholder="请输入国家（其他）" style="display:none;">
+            <input type="text" name="country_other" placeholder="若其他，请填写" data-unified-for="country">
           </div>
-
-          <div class="question select-other" id="stateGroup" style="display:none;">
-            <div class="question-title"><i class="fas fa-map-marked"></i>省 / 州 <span class="required">*</span></div>
-            <select name="state" id="state">
-              <option value="">请选择</option>
-              <!-- 中国示例省份 -->
-              <option value="北京">北京</option>
-              <option value="上海">上海</option>
-              <option value="广东">广东</option>
-              <option value="其他">其他</option>
+          <div class="question">
+            <div class="question-title">省/州 <span class="required">*</span></div>
+            <select id="stateSelect" name="province" required>
+              <option value="未知">未知</option>
             </select>
-            <input type="text" placeholder="请输入省/州（其他）" style="display:none;">
+            <input type="text" name="province_other" placeholder="若其他，请填写" data-unified-for="province">
           </div>
-
-          <div class="question select-other" id="cityGroup" style="display:none;">
-            <div class="question-title"><i class="fas fa-city"></i>城市 <span class="required">*</span></div>
-            <select name="city" id="city">
-              <option value="">请选择</option>
-              <option value="北京">北京</option>
-              <option value="上海">上海</option>
-              <option value="广州">广州</option>
-              <option value="深圳">深圳</option>
-              <option value="其他">其他</option>
+          <div class="question">
+            <div class="question-title">城市 <span class="required">*</span></div>
+            <select id="citySelect" name="city" required>
+              <option value="未知">未知</option>
             </select>
-            <input type="text" placeholder="请输入城市（其他）" style="display:none;">
+            <input type="text" name="city_other" placeholder="若其他，请填写" data-unified-for="city">
           </div>
-
           <div class="buttons">
             <button type="button" class="btn-prev" onclick="showPage(1)"><i class="fas fa-arrow-left"></i> 上一页</button>
-            <button type="button" class="btn-next" onclick="showPage(3)">下一页 <i class="fas fa-arrow-right"></i></button>
+            <button type="button" class="btn-next" onclick="validatePage(2)">下一页 <i class="fas fa-arrow-right"></i></button>
           </div>
-          <div class="page-indicator">第 2 页，共 4 页</div>
         </div>
 
-        <!-- 第3页：职业 -->
+        <!-- 第3页 -->
         <div class="page" id="page3" style="display:none">
-          <div class="question select-other">
-            <div class="question-title"><i class="fas fa-briefcase"></i>职业 <span class="required">*</span></div>
+          <div class="question">
+            <div class="question-title">职业 <span class="required">*</span></div>
             <select name="occupation" required>
               <option value="">请选择</option>
               <option value="学生">学生</option>
               <option value="教师">教师</option>
               <option value="工程师">工程师</option>
-              <option value="医生">医生</option>
+              <option value="自由职业">自由职业</option>
               <option value="其他">其他</option>
             </select>
-            <input type="text" placeholder="请输入职业（其他）" style="display:none;">
+            <input type="text" name="occupation_other" placeholder="若其他，请填写" data-unified-for="occupation">
           </div>
-
           <div class="buttons">
             <button type="button" class="btn-prev" onclick="showPage(2)"><i class="fas fa-arrow-left"></i> 上一页</button>
-            <button type="button" class="btn-next" onclick="showPage(4)">下一页 <i class="fas fa-arrow-right"></i></button>
+            <button type="button" class="btn-next" onclick="validatePage(3)">下一页 <i class="fas fa-arrow-right"></i></button>
           </div>
-          <div class="page-indicator">第 3 页，共 4 页</div>
         </div>
 
-        <!-- 第4页：留言和邮箱 -->
+        <!-- 第4页 -->
         <div class="page" id="page4" style="display:none">
           <div class="question">
-            <div class="question-title"><i class="fas fa-envelope"></i>留言（选填）</div>
-            <textarea name="message" placeholder="写下你的意见或建议"></textarea>
+            <div class="question-title">留言（选填）</div>
+            <textarea name="message" placeholder="您可以在这里留言"></textarea>
           </div>
           <div class="question">
-            <div class="question-title"><i class="fas fa-at"></i>邮箱（选填）</div>
-            <input type="email" name="email" placeholder="your@email.com">
+            <div class="question-title">邮箱（选填）</div>
+            <input type="email" name="email" placeholder="邮箱地址">
           </div>
-
           <div class="buttons">
             <button type="button" class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> 上一页</button>
-            <button type="button" class="btn-submit" onclick="checkRequiredAndSubmit()">提交问卷 <i class="fas fa-check"></i></button>
+            <button type="button" class="btn-submit" onclick="validatePage(4)">提交问卷 <i class="fas fa-check"></i></button>
           </div>
-          <div class="page-indicator">第 4 页，共 4 页</div>
         </div>
 
         <!-- 感谢页面 -->
         <div class="thank-you-message" id="thankYou" style="display:none">
           <i class="fas fa-check-circle"></i>
           <h2>感谢您完成问卷！</h2>
-          <p>您的回答已成功提交，将帮助我们进行更好的社会经济分析。</p>
-          <p>我们非常重视您的隐私，所有数据都将严格保密。</p>
+          <p>您的回答已成功提交，将帮助我们进行统计与分析。</p>
         </div>
-
       </div>
     </form>
   </div>
@@ -165,7 +138,5 @@
   <div class="save-indicator" id="saveIndicator">
     <i class="fas fa-save"></i> 进度已自动保存
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
