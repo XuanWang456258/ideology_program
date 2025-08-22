@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>意识形态倾向调查问卷</title>
+  <link rel="stylesheet" href="ideology_survey_complete.css">
+  <script defer src="ideology_map.js"></script>
+  <script defer src="ideology_survey_complete.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>意识形态倾向调查问卷</h1>
+      <p>第一部分：基础信息收集 | 第二部分：意识形态倾向测试</p>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <form id="surveyForm">
+      <div class="survey-content">
+        <!-- 基础信息部分 -->
+        <!-- 第1页：基本信息 -->
+        <div class="page" id="page1">
+          <div class="question">
+            <div class="question-title">姓名（选填，默认匿名）</div>
+            <input type="text" name="name" placeholder="匿名">
+          </div>
+          <div class="question">
+            <div class="question-title">性别 <span class="required">*</span></div>
+            <select name="gender" required>
+              <option value="">请选择</option>
+              <option value="男">男</option>
+              <option value="女">女</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+          <div class="question">
+            <div class="question-title">年龄 <span class="required">*</span></div>
+            <input type="number" name="age" min="0" max="120" required>
+          </div>
+          <div class="question">
+            <div class="question-title">种族/民族 <span class="required">*</span></div>
+            <select name="ethnicity" required>
+              <option value="">请选择</option>
+              <option value="汉族">汉族</option>
+              <option value="蒙古族">蒙古族</option>
+              <option value="回族">回族</option>
+              <option value="其他">其他</option>
+            </select>
+            <input type="text" name="ethnicity_other" placeholder="若其他，请填写" data-unified-for="ethnicity">
+          </div>
+          <div class="buttons">
+            <div></div>
+            <button type="button" class="btn-next" onclick="validatePage(1)">下一页 <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- 第2页：地理位置 -->
+        <div class="page" id="page2" style="display:none">
+          <div class="question">
+            <div class="question-title">国家 <span class="required">*</span></div>
+            <select id="countrySelect" name="country" required>
+              <option value="未知">未知</option>
+              <option value="中国">中国</option>
+              <option value="美国">美国</option>
+              <option value="澳大利亚">澳大利亚</option>
+              <option value="德国">德国</option>
+              <option value="其他">其他</option>
+            </select>
+            <input type="text" name="country_other" placeholder="若其他，请填写" data-unified-for="country">
+          </div>
+          <div class="question">
+            <div class="question-title">省/州 <span class="required">*</span></div>
+            <select id="stateSelect" name="province" required>
+              <option value="未知">未知</option>
+            </select>
+            <input type="text" name="province_other" placeholder="若其他，请填写" data-unified-for="province">
+          </div>
+          <div class="question">
+            <div class="question-title">城市 <span class="required">*</span></div>
+            <select id="citySelect" name="city" required>
+              <option value="未知">未知</option>
+            </select>
+            <input type="text" name="city_other" placeholder="若其他，请填写" data-unified-for="city">
+          </div>
+          <div class="buttons">
+            <button type="button" class="btn-prev" onclick="showPage(1)"><i class="fas fa-arrow-left"></i> 上一页</button>
+            <button type="button" class="btn-next" onclick="validatePage(2)">下一页 <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- 第3页：职业信息 -->
+        <div class="page" id="page3" style="display:none">
+          <div class="question">
+            <div class="question-title">职业 <span class="required">*</span></div>
+            <select name="occupation" required>
+              <option value="">请选择</option>
+              <option value="学生">学生</option>
+              <option value="教师">教师</option>
+              <option value="工程师">工程师</option>
+              <option value="自由职业">自由职业</option>
+              <option value="其他">其他</option>
+            </select>
+            <input type="text" name="occupation_other" placeholder="若其他，请填写" data-unified-for="occupation">
+          </div>
+          <div class="buttons">
+            <button type="button" class="btn-prev" onclick="showPage(2)"><i class="fas fa-arrow-left"></i> 上一页</button>
+            <button type="button" class="btn-next" onclick="validatePage(3)">下一页 <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- 第4页：联系方式 -->
+        <div class="page" id="page4" style="display:none">
+          <div class="question">
+            <div class="question-title">留言（选填）</div>
+            <textarea name="message" placeholder="您可以在这里留言"></textarea>
+          </div>
+          <div class="question">
+            <div class="question-title">邮箱（选填）</div>
+            <input type="email" name="email" placeholder="邮箱地址">
+          </div>
+          <div class="buttons">
+            <button type="button" class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> 上一页</button>
+            <button type="button" class="btn-next" onclick="validatePage(4)">开始测试 <i class="fas fa-play"></i></button>
+          </div>
+        </div>
+
+        <!-- 意识形态测试部分 -->
+        <div class="page" id="quizPage" style="display:none">
+          <div class="section-header">
+            <h2>意识形态倾向测试</h2>
+            <p>共30题，每道题都涉及经济、文化、权力集中度三个维度</p>
+          </div>
+          <div class="question">
+            <div class="question-title" id="questionTitle">正在载入题目…</div>
+            <div id="options"></div>
+          </div>
+          <div class="buttons">
+            <button type="button" class="btn-prev" id="btnPrev" disabled><i class="fas fa-arrow-left"></i> 上一题</button>
+            <button type="button" class="btn-next" id="btnNext">下一题 <i class="fas fa-arrow-right"></i></button>
+          </div>
+          <div class="page-indicator" id="pageIndicator"></div>
+          <div class="score-badges" id="liveScores" aria-live="polite"></div>
+        </div>
+
+        <!-- 最终结果页面 -->
+        <div class="thank-you-message" id="resultPage" style="display:none">
+          <i class="fas fa-check-circle"></i>
+          <h2>调查完成！</h2>
+          <p>感谢您完成整个调查问卷。以下是您的意识形态倾向分析：</p>
+          <div class="results">
+            <div class="score-badges" id="finalIdeology"></div>
+            <div class="user-info-summary" id="userInfoSummary"></div>
+            <button type="button" class="btn-prev" id="btnRestart"><i class="fas fa-rotate-left"></i> 重新开始</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="save-indicator" id="saveIndicator">
+    <i class="fas fa-save"></i> 进度已自动保存
+  </div>
+</body>
+</html>
