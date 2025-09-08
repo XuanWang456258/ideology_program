@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>两阶段意识形态倾向测试</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>两阶段意识形态倾向测试</h1>
+      <p>共20题，分两个阶段：第一阶段15题确定大类，第二阶段5题确定具体倾向</p>
+
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <form id="surveyForm">
+      <div class="survey-content">
+        <!-- 意识形态测试部分 -->
+        <div class="page" id="quizPage">
+          <div class="section-header">
+            <h2>意识形态倾向测试</h2>
+            <p>共20题，分两个阶段：第一阶段15题确定大类，第二阶段5题确定具体倾向</p>
+          </div>
+          <div class="question">
+            <div class="question-title" id="questionTitle">正在载入题目…</div>
+            <div id="options"></div>
+          </div>
+          <div class="buttons">
+            <button type="button" class="btn-prev" id="btnPrev" disabled><i class="fas fa-arrow-left"></i> 上一题</button>
+            <button type="button" class="btn-next" id="btnNext">下一题 <i class="fas fa-arrow-right"></i></button>
+          </div>
+          <div class="page-indicator" id="pageIndicator"></div>
+          <div class="score-badges" id="liveScores" aria-live="polite"></div>
+        </div>
+
+        <!-- 最终结果页面 -->
+        <div class="thank-you-message" id="resultPage" style="display:none">
+          <i class="fas fa-check-circle"></i>
+          <h2>测试完成！</h2>
+          <p>以下是您的意识形态倾向分析：</p>
+          <div class="results">
+            <div class="score-badges" id="finalIdeology"></div>
+            <button type="button" class="btn-restart" id="btnRestart"><i class="fas fa-rotate-left"></i> 重新开始</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="save-indicator" id="saveIndicator">
+    <i class="fas fa-save"></i> 进度已自动保存
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
