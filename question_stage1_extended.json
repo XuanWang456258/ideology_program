@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "question": "是否支持提高富人税以扩大再分配？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 2,
+    "question": "是否支持扩大公共医疗的财政投入？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 3,
+    "question": "是否支持提高最低工资标准？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 4,
+    "question": "是否支持关键行业由国家掌控（如能源、铁路）？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 5,
+    "question": "是否支持政府干预市场以纠正市场失灵？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 6,
+    "question": "是否支持自由贸易和全球化？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 7,
+    "question": "是否支持减少政府监管以促进经济增长？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 8,
+    "question": "是否支持私有化国有企业？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 9,
+    "question": "是否支持削减社会福利支出？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 10,
+    "question": "是否支持累进税制？",
+    "axis": "economic",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 11,
+    "question": "是否支持传统家庭价值观？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 12,
+    "question": "是否支持多元文化主义？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 13,
+    "question": "是否支持宗教在社会中的重要作用？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 14,
+    "question": "是否支持性别平等和LGBTQ+权利？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 15,
+    "question": "是否支持移民和难民接纳？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 16,
+    "question": "是否支持环境保护优先于经济发展？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 17,
+    "question": "是否支持艺术和文化的政府资助？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 18,
+    "question": "是否支持言论自由和表达自由？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 19,
+    "question": "是否支持传统节日和习俗的维护？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 20,
+    "question": "是否支持科学教育和理性思维？",
+    "axis": "culture",
+    "options": [
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
+    ]
+  },
+  {
+    "id": 21,
+    "question": "是否支持扩大公共监控以维护安全与秩序？",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 22,
+    "question": "是否支持加强执法和惩罚措施？",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 3}
+    ]
+  },
+  {
+    "id": 23,
+    "question": "取消护照与边境管制",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": 1},
+      {"text": "反对", "score": 1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -6}
+    ]
+  },
+  {
+    "id": 24,
+    "question": "是否支持民主参与和公民投票？",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": 5},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -1},
+      {"text": "强烈支持", "score": -2}
+    ]
+  },
+  {
+    "id": 25,
+    "question": "是否支持媒体审查和内容管制？",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": -2},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 2}
+    ]
+  },
+  {
+    "id": 26,
+    "question": "是否支持军队和警察的权威？",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": -2},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 1},
+      {"text": "强烈支持", "score": 4}
+    ]
+  },
+  {
+    "id": 27,
+    "question": "是否支持专家治国和技术官僚？",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": -4},
+      {"text": "反对", "score": -2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 2},
+      {"text": "强烈支持", "score": 4}
+    ]
+  },
+  {
+    "id": 28,
+    "question": "是否支持政治透明度和信息公开？",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": 6},
+      {"text": "反对", "score": 2},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -1},
+      {"text": "强烈支持", "score": -2}
+    ]
+  },
+  {
+    "id": 29,
+    "question": "是否支持社会等级和权威结构？",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": -3},
+      {"text": "反对", "score": -1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": 2},
+      {"text": "强烈支持", "score": 4}
+    ]
+  },
+  {
+    "id": 30,
+    "question": "政府应该被摒弃",
+    "axis": "authority",
+    "options": [
+      {"text": "强烈反对", "score": 2},
+      {"text": "反对", "score": 1},
+      {"text": "中立", "score": 0},
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -10}
+    ]
+  }
+]

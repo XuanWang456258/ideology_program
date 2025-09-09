@@ -4,11 +4,11 @@
     "question": "是否支持提高富人税以扩大再分配？",
     "axis": "economic",
     "options": [
-      {"text": "强烈反对", "score": 2},
-      {"text": "反对", "score": 1},
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": -1},
-      {"text": "强烈支持", "score": -2}
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
     ]
   },
   {
@@ -16,11 +16,11 @@
     "question": "是否支持扩大公共医疗的财政投入？",
     "axis": "economic",
     "options": [
-      {"text": "强烈反对", "score": 2},
-      {"text": "反对", "score": 1},
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": -1},
-      {"text": "强烈支持", "score": -2}
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
     ]
   },
   {
@@ -28,11 +28,11 @@
     "question": "是否支持提高最低工资标准？",
     "axis": "economic",
     "options": [
-      {"text": "强烈反对", "score": 2},
-      {"text": "反对", "score": 1},
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": -1},
-      {"text": "强烈支持", "score": -2}
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
     ]
   },
   {
@@ -40,11 +40,11 @@
     "question": "是否支持关键行业由国家掌控（如能源、铁路）？",
     "axis": "economic",
     "options": [
-      {"text": "强烈反对", "score": 2},
-      {"text": "反对", "score": 1},
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": -1},
-      {"text": "强烈支持", "score": -2}
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
     ]
   },
   {
@@ -52,11 +52,11 @@
     "question": "是否支持对大型平台加强反垄断监管？",
     "axis": "economic",
     "options": [
-      {"text": "强烈反对", "score": 2},
-      {"text": "反对", "score": 1},
+      {"text": "强烈反对", "score": 4},
+      {"text": "反对", "score": 2},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": -1},
-      {"text": "强烈支持", "score": -2}
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -4}
     ]
   },
   {
@@ -64,11 +64,11 @@
     "question": "是否支持在学校加强传统文化与礼仪教育？",
     "axis": "culture",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -76,11 +76,11 @@
     "question": "是否支持学校推行严格校服与仪容管理？",
     "axis": "culture",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -88,11 +88,11 @@
     "question": "是否支持限制过度娱乐化的综艺内容？",
     "axis": "culture",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -100,11 +100,11 @@
     "question": "是否支持在公共文化项目中优先扶持传统艺术？",
     "axis": "culture",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -112,11 +112,11 @@
     "question": "是否支持婚姻制度维持其传统定义与约束？",
     "axis": "culture",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -124,11 +124,11 @@
     "question": "是否支持在治安问题上赋予警方更大裁量权？",
     "axis": "authority",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -136,11 +136,11 @@
     "question": "是否支持扩大国家在紧急状态下的应急权力？",
     "axis": "authority",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -148,11 +148,11 @@
     "question": "是否支持对大型集会和示威实施更严格审批？",
     "axis": "authority",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -160,11 +160,11 @@
     "question": "是否支持强化全国层面的统一管理与决策？",
     "axis": "authority",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   },
   {
@@ -172,11 +172,11 @@
     "question": "是否支持扩大公共监控以维护安全与秩序？",
     "axis": "authority",
     "options": [
-      {"text": "强烈反对", "score": -2},
+      {"text": "强烈反对", "score": -3},
       {"text": "反对", "score": -1},
       {"text": "中立", "score": 0},
       {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 2}
+      {"text": "强烈支持", "score": 3}
     ]
   }
 ]

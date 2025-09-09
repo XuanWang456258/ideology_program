@@ -2,6 +2,7 @@
 const STAGE1_QUESTIONS = 15; // 第一阶段题目数（每个轴5道题）
 const STAGE2_QUESTIONS = 5;  // 第二阶段题目数
 const TOTAL_QUESTIONS = STAGE1_QUESTIONS + STAGE2_QUESTIONS;
+const QUESTIONS_PER_AXIS = 5; // 每个轴选择的题目数
 
 const AXIS_LABEL = {
   economic: "经济",
@@ -14,6 +15,7 @@ let stage1Questions = [];
 let stage2Questions = {};
 let ideologyCategories = {};
 let specificTerms = {};
+let allStage1Questions = []; // 存储所有可用的第一阶段题目
 let currentStage = 1;
 let currentQuestionIndex = 0;
 let answers = new Map();
@@ -29,8 +31,8 @@ function init() {
     localStorage.setItem('surveyStartTime', new Date().toLocaleString());
   }
   
-  updateProgressBar();
   restoreData();
+  updateProgressBar();
   setupQuizLogic();
   startIdeologyQuiz();
 }
@@ -38,6 +40,27 @@ function init() {
 function updateProgressBar() {
   const progress = (currentQuestionIndex / (currentStage === 1 ? STAGE1_QUESTIONS : STAGE2_QUESTIONS)) * 100;
   document.getElementById('progressBar').style.width = `${progress}%`;
+}
+
+// 随机选择题目函数
+function selectRandomQuestions(allQuestions, questionsPerAxis) {
+  const axes = ['economic', 'culture', 'authority'];
+  const selectedQuestions = [];
+  
+  axes.forEach(axis => {
+    // 获取该轴的所有题目
+    const axisQuestions = allQuestions.filter(q => q.axis === axis);
+    
+    // 随机打乱数组
+    const shuffled = axisQuestions.sort(() => Math.random() - 0.5);
+    
+    // 选择前N道题目
+    const selected = shuffled.slice(0, questionsPerAxis);
+    selectedQuestions.push(...selected);
+  });
+  
+  // 再次随机打乱所有选中的题目
+  return selectedQuestions.sort(() => Math.random() - 0.5);
 }
 
 function saveData() {
@@ -97,7 +120,8 @@ async function loadStage2Questions() {
     'question_stage2_rlm.json',
     'question_stage2_rlu.json',
     'question_stage2_rmrm.json',
-    'question_stage2_rru.json'
+    'question_stage2_rru.json',
+    'question_stage2_lrm.json'
   ];
   
   const promises = categoryFiles.map(file => 
@@ -138,11 +162,15 @@ async function loadQuestionsAndStart() {
 
 async function loadAllData() {
   try {
-    // 先加载Stage1题目（必需）
-    const stage1Response = await fetch('question_stage1.json', { cache: 'no-store' });
+    // 先加载所有Stage1题目（扩展题库）
+    const stage1Response = await fetch('question_stage1_extended.json', { cache: 'no-store' });
     if (!stage1Response.ok) throw new Error(`HTTP ${stage1Response.status}: ${stage1Response.statusText}`);
-    stage1Questions = await stage1Response.json();
-    console.log('Stage1 questions loaded:', stage1Questions.length);
+    allStage1Questions = await stage1Response.json();
+    console.log('All Stage1 questions loaded:', allStage1Questions.length);
+    
+    // 随机选择15道题目（每个轴5道）
+    stage1Questions = selectRandomQuestions(allStage1Questions, QUESTIONS_PER_AXIS);
+    console.log('Selected Stage1 questions:', stage1Questions.length);
     
     // 并行加载其他数据（可选）
     const otherDataPromises = [
@@ -239,6 +267,7 @@ function renderStage1Question() {
   
   // 若当前题尚未作答，则禁用"下一题/提交"按钮
   document.getElementById('btnNext').disabled = !saved;
+  
 }
 
 function renderStage2Question() {
@@ -254,7 +283,7 @@ function renderStage2Question() {
   
   if (!question) {
     console.error('题目索引超出范围:', questionIndex, '总题目数:', questions.length);
-    document.getElementById('questionTitle').textContent = '题目索引超出范围';
+    document.getElementById('questionTitle').textContent = '题目索引超出范围，按F12，在Console中输入localStorage.clear()，按enter，并重新刷新页面';
     return;
   }
   
@@ -308,6 +337,7 @@ function renderStage2Question() {
   
   // 若当前题尚未作答，则禁用"下一题/提交"按钮
   document.getElementById('btnNext').disabled = !saved;
+  
 }
 
 function updateStage1Scores() {
@@ -481,7 +511,12 @@ function updateQuizProgress() {
   const btnPrev = document.getElementById('btnPrev');
   const btnNext = document.getElementById('btnNext');
   
-  btnPrev.disabled = currentQuestionIndex === 0;
+  // 根据当前阶段和题目索引禁用上一题按钮
+  if (currentStage === 1) {
+    btnPrev.disabled = currentQuestionIndex === 0;
+  } else if (currentStage === 2) {
+    btnPrev.disabled = currentQuestionIndex === STAGE1_QUESTIONS;
+  }
   
   if (currentStage === 1) {
     btnNext.textContent = currentQuestionIndex === STAGE1_QUESTIONS - 1 ? '进入第二阶段 ' : '下一题 ';
@@ -649,20 +684,26 @@ function nextOrSubmit() {
 }
 
 function prevQuestion() {
-  if (currentQuestionIndex > 0) {
-    currentQuestionIndex--;
-    saveData();
-    if (currentStage === 1) {
+  if (currentStage === 1) {
+    // 第一阶段：只有在不是第一题时才能上一题
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      saveData();
       renderStage1Question();
-    } else {
-      renderStage2Question();
     }
   } else if (currentStage === 2) {
-    // 从第二阶段回到第一阶段
-    currentStage = 1;
-    currentQuestionIndex = STAGE1_QUESTIONS - 1;
-    saveData();
-    renderStage1Question();
+    // 第二阶段：只有在不是第二阶段第一题时才能上一题
+    if (currentQuestionIndex > STAGE1_QUESTIONS) {
+      currentQuestionIndex--;
+      saveData();
+      renderStage2Question();
+    } else if (currentQuestionIndex === STAGE1_QUESTIONS) {
+      // 是第二阶段第一题，回到第一阶段最后一题
+      currentStage = 1;
+      currentQuestionIndex = STAGE1_QUESTIONS - 1;
+      saveData();
+      renderStage1Question();
+    }
   }
 }
 
@@ -746,6 +787,14 @@ function restartSurvey() {
   answers.clear();
   stage1Scores = { economic: 0, culture: 0, authority: 0 };
   determinedCategory = null;
+  stage2Scores.clear();
+  determinedIdeology = null;
+  
+  // 重新随机选择题目
+  if (allStage1Questions.length > 0) {
+    stage1Questions = selectRandomQuestions(allStage1Questions, QUESTIONS_PER_AXIS);
+    console.log('重新选择题目:', stage1Questions.length);
+  }
   
   // 显示测试页面
   document.getElementById('quizPage').style.display = 'block';
@@ -756,7 +805,9 @@ function restartSurvey() {
   
   // 清除本地存储
   localStorage.removeItem('quizAnswers');
+  localStorage.removeItem('surveyStartTime');
 }
+
 
 // 绑定Enter键快捷键
 document.addEventListener('keydown', (e) => {
