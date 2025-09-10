@@ -685,3 +685,56 @@ body {
     font-size: 1.4rem;
   }
 }
+
+/* 清除缓存按钮样式 */
+.clear-cache-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(108, 117, 125, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-cache-btn:hover {
+  background: rgba(220, 53, 69, 0.9);
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.clear-cache-btn:active {
+  transform: scale(0.95);
+}
+
+/* 响应式设计 - 清除缓存按钮 */
+@media (max-width: 768px) {
+  .clear-cache-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 0.8rem;
+    bottom: 15px;
+    left: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .clear-cache-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+    bottom: 10px;
+    left: 10px;
+  }
+}

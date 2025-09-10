@@ -64,11 +64,11 @@
     "question": "是否支持自由贸易和全球化？",
     "axis": "economic",
     "options": [
-      {"text": "强烈反对", "score": -3},
-      {"text": "反对", "score": -1},
+      {"text": "强烈反对", "score": 3},
+      {"text": "反对", "score": 2},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": 1},
-      {"text": "强烈支持", "score": 3}
+      {"text": "支持", "score": -2},
+      {"text": "强烈支持", "score": -3}
     ]
   },
   {
@@ -77,9 +77,9 @@
     "axis": "economic",
     "options": [
       {"text": "强烈反对", "score": -3},
-      {"text": "反对", "score": -1},
+      {"text": "反对", "score": -2},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": 1},
+      {"text": "支持", "score": 2},
       {"text": "强烈支持", "score": 3}
     ]
   },
@@ -89,9 +89,9 @@
     "axis": "economic",
     "options": [
       {"text": "强烈反对", "score": -3},
-      {"text": "反对", "score": -1},
+      {"text": "反对", "score": -2},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": 1},
+      {"text": "支持", "score": 2},
       {"text": "强烈支持", "score": 3}
     ]
   },
@@ -355,7 +355,7 @@
       {"text": "强烈反对", "score": 2},
       {"text": "反对", "score": 1},
       {"text": "中立", "score": 0},
-      {"text": "支持", "score": -2},
+      {"text": "支持", "score": -5},
       {"text": "强烈支持", "score": -10}
     ]
   }

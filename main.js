@@ -48,6 +48,7 @@ function init() {
   
   setupModeSelection();
   setupQuizLogic();
+  setupClearCacheButton();
   
   // 检查是否有保存的模式选择
   const savedMode = localStorage.getItem('selectedMode');
@@ -89,6 +90,79 @@ function setupModeSelection() {
       selectMode(mode);
     });
   });
+}
+
+// 设置清除缓存按钮
+function setupClearCacheButton() {
+  const clearCacheBtn = document.getElementById('clearCacheBtn');
+  if (clearCacheBtn) {
+    clearCacheBtn.addEventListener('click', clearAllCache);
+  }
+}
+
+// 清除所有缓存
+function clearAllCache() {
+  // 确认对话框
+  if (confirm('确定要清除所有本地缓存吗？这将重置所有测试进度和设置。')) {
+    try {
+      // 清除localStorage
+      localStorage.clear();
+      
+      // 重置所有状态变量
+      currentStage = 1;
+      currentQuestionIndex = 0;
+      answers.clear();
+      stage1Scores = { economic: 0, culture: 0, authority: 0 };
+      determinedCategory = null;
+      stage2Scores.clear();
+      determinedIdeology = null;
+      selectedMode = null;
+      
+      // 显示成功提示
+      showClearCacheSuccess();
+      
+      // 重新加载页面
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+      
+    } catch (error) {
+      console.error('清除缓存失败:', error);
+      alert('清除缓存失败，请手动刷新页面。');
+    }
+  }
+}
+
+// 显示清除缓存成功提示
+function showClearCacheSuccess() {
+  // 创建提示元素
+  const successEl = document.createElement('div');
+  successEl.id = 'clearCacheSuccess';
+  successEl.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(40, 167, 69, 0.95);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    z-index: 10000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+  `;
+  successEl.innerHTML = '<i class="fas fa-check-circle" style="margin-right: 10px;"></i>缓存已清除，页面即将刷新...';
+  
+  document.body.appendChild(successEl);
+  
+  // 3秒后移除提示
+  setTimeout(() => {
+    if (successEl.parentNode) {
+      successEl.parentNode.removeChild(successEl);
+    }
+  }, 3000);
 }
 
 // 选择模式
