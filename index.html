@@ -11,8 +11,8 @@
   <div class="container">
     <div class="header">
       <h1>两阶段意识形态倾向测试</h1>
-      <p>共20题，分两个阶段：第一阶段15题确定大类，第二阶段5题确定具体倾向</p>
-      <p style="font-size: 0.9em; color: #666;">题库包含30道题目，每次测试随机选择15道，确保测试的多样性和准确性</p>
+      <p>两阶段意识形态倾向测试</p>
+      <p style="font-size: 0.9em; color: #666;">请选择您希望进行的测试模式</p>
 
     </div>
     
@@ -22,11 +22,35 @@
 
     <form id="surveyForm">
       <div class="survey-content">
+        <!-- 欢迎界面 -->
+        <div class="page" id="welcomePage">
+          <div class="welcome-content">
+            <h2>欢迎参加意识形态倾向测试</h2>
+            <p>请选择您希望进行的测试模式：</p>
+            <div class="mode-selection">
+              <div class="mode-card" data-mode="30-5">
+                <h3>30-5模式</h3>
+                <p>第一阶段：30道题（每个维度10道）</p>
+                <p>第二阶段：5道题</p>
+                <p class="mode-description">更全面的测试，提供更准确的意识形态分析</p>
+                <button type="button" class="btn-mode-select" data-mode="30-5">选择此模式</button>
+              </div>
+              <div class="mode-card" data-mode="15-5">
+                <h3>15-5模式</h3>
+                <p>第一阶段：15道题（每个维度5道）</p>
+                <p>第二阶段：5道题</p>
+                <p class="mode-description">快速测试，适合时间有限的用户</p>
+                <button type="button" class="btn-mode-select" data-mode="15-5">选择此模式</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- 意识形态测试部分 -->
-        <div class="page" id="quizPage">
+        <div class="page" id="quizPage" style="display:none;">
           <div class="section-header">
             <h2>意识形态倾向测试</h2>
-            <p>共20题，分两个阶段：第一阶段15题确定大类，第二阶段5题确定具体倾向</p>
+            <p id="stageDescription">正在加载...</p>
           </div>
           <div class="question">
             <div class="question-title" id="questionTitle">正在载入题目…</div>

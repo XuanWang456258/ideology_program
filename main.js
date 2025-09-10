@@ -1,8 +1,22 @@
 // 两阶段意识形态倾向测试 - 主逻辑
-const STAGE1_QUESTIONS = 15; // 第一阶段题目数（每个轴5道题）
-const STAGE2_QUESTIONS = 5;  // 第二阶段题目数
-const TOTAL_QUESTIONS = STAGE1_QUESTIONS + STAGE2_QUESTIONS;
-const QUESTIONS_PER_AXIS = 5; // 每个轴选择的题目数
+let STAGE1_QUESTIONS = 30; // 第一阶段题目数（动态调整）
+let STAGE2_QUESTIONS = 5;  // 第二阶段题目数
+let TOTAL_QUESTIONS = STAGE1_QUESTIONS + STAGE2_QUESTIONS;
+let QUESTIONS_PER_AXIS = 10; // 每个轴选择的题目数（动态调整）
+
+// 模式配置
+const MODES = {
+  '30-5': {
+    stage1Questions: 30,
+    questionsPerAxis: 10,
+    description: '更全面的测试，提供更准确的意识形态分析'
+  },
+  '15-5': {
+    stage1Questions: 15,
+    questionsPerAxis: 5,
+    description: '快速测试，适合时间有限的用户'
+  }
+};
 
 const AXIS_LABEL = {
   economic: "经济",
@@ -11,6 +25,7 @@ const AXIS_LABEL = {
 };
 
 // 测试相关变量
+let selectedMode = null; // 用户选择的模式
 let stage1Questions = [];
 let stage2Questions = {};
 let ideologyCategories = {};
@@ -31,9 +46,70 @@ function init() {
     localStorage.setItem('surveyStartTime', new Date().toLocaleString());
   }
   
-  restoreData();
-  updateProgressBar();
+  setupModeSelection();
   setupQuizLogic();
+  
+  // 检查是否有保存的模式选择
+  const savedMode = localStorage.getItem('selectedMode');
+  if (savedMode && MODES[savedMode]) {
+    selectedMode = savedMode;
+    const modeConfig = MODES[savedMode];
+    STAGE1_QUESTIONS = modeConfig.stage1Questions;
+    QUESTIONS_PER_AXIS = modeConfig.questionsPerAxis;
+    TOTAL_QUESTIONS = STAGE1_QUESTIONS + STAGE2_QUESTIONS;
+    startIdeologyQuiz();
+  } else {
+    showWelcomePage();
+  }
+}
+
+// 显示欢迎页面
+function showWelcomePage() {
+  document.getElementById('welcomePage').style.display = 'block';
+  document.getElementById('quizPage').style.display = 'none';
+  document.getElementById('resultPage').style.display = 'none';
+  document.getElementById('progressBar').style.width = '0%';
+}
+
+// 设置模式选择逻辑
+function setupModeSelection() {
+  const modeButtons = document.querySelectorAll('.btn-mode-select');
+  modeButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const mode = e.target.getAttribute('data-mode');
+      selectMode(mode);
+    });
+  });
+  
+  // 为整个卡片添加点击事件
+  const modeCards = document.querySelectorAll('.mode-card');
+  modeCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const mode = card.getAttribute('data-mode');
+      selectMode(mode);
+    });
+  });
+}
+
+// 选择模式
+function selectMode(mode) {
+  if (!MODES[mode]) {
+    console.error('无效的模式:', mode);
+    return;
+  }
+  
+  selectedMode = mode;
+  const modeConfig = MODES[mode];
+  
+  // 更新常量
+  STAGE1_QUESTIONS = modeConfig.stage1Questions;
+  QUESTIONS_PER_AXIS = modeConfig.questionsPerAxis;
+  TOTAL_QUESTIONS = STAGE1_QUESTIONS + STAGE2_QUESTIONS;
+  
+  // 保存模式选择
+  localStorage.setItem('selectedMode', mode);
+  
+  // 开始测试
   startIdeologyQuiz();
 }
 
@@ -102,8 +178,10 @@ function setupQuizLogic() {
 }
 
 function startIdeologyQuiz() {
-  // 显示测试页面
+  // 隐藏欢迎页面，显示测试页面
+  document.getElementById('welcomePage').style.display = 'none';
   document.getElementById('quizPage').style.display = 'block';
+  document.getElementById('resultPage').style.display = 'none';
   
   // 加载题目
   loadQuestionsAndStart();
@@ -224,7 +302,10 @@ function renderStage1Question() {
   
   // 更新页面标题
   document.querySelector('.section-header h2').textContent = '意识形态倾向测试 - 第一阶段';
-  document.querySelector('.section-header p').textContent = `共${STAGE1_QUESTIONS}题，每道题都涉及经济、文化、权力集中度三个维度中的一个`;
+  const questionsPerAxisText = selectedMode === '30-5' ? '每个维度10道题' : '每个维度5道题';
+  const stageDescription = `共${STAGE1_QUESTIONS}题，每道题都涉及经济、文化、权力集中度三个维度中的一个（${questionsPerAxisText}）`;
+  document.querySelector('.section-header p').textContent = stageDescription;
+  document.getElementById('stageDescription').textContent = stageDescription;
 
   const optionsEl = document.getElementById('options');
   optionsEl.innerHTML = '';
@@ -416,10 +497,18 @@ function calculateStage1MatchQuality() {
   const category = ideologyCategories[determinedCategory];
   const ranges = category.ranges;
   
+  // 根据选择的模式调整分数
+  const scoreDivisor = selectedMode === '30-5' ? 2 : 1;
+  const adjustedScores = {
+    economic: stage1Scores.economic / scoreDivisor,
+    culture: stage1Scores.culture / scoreDivisor,
+    authority: stage1Scores.authority / scoreDivisor
+  };
+  
   // 检查是否在范围内
-  const inEconomicRange = stage1Scores.economic >= ranges.economic[0] && stage1Scores.economic <= ranges.economic[1];
-  const inCultureRange = stage1Scores.culture >= ranges.culture[0] && stage1Scores.culture <= ranges.culture[1];
-  const inAuthorityRange = stage1Scores.authority >= ranges.authority[0] && stage1Scores.authority <= ranges.authority[1];
+  const inEconomicRange = adjustedScores.economic >= ranges.economic[0] && adjustedScores.economic <= ranges.economic[1];
+  const inCultureRange = adjustedScores.culture >= ranges.culture[0] && adjustedScores.culture <= ranges.culture[1];
+  const inAuthorityRange = adjustedScores.authority >= ranges.authority[0] && adjustedScores.authority <= ranges.authority[1];
   
   if (inEconomicRange && inCultureRange && inAuthorityRange) {
     // 完全匹配，计算距离中心的分数
@@ -428,9 +517,9 @@ function calculateStage1MatchQuality() {
     const authCenter = (ranges.authority[0] + ranges.authority[1]) / 2;
     
     const distance = Math.sqrt(
-      Math.pow(stage1Scores.economic - econCenter, 2) +
-      Math.pow(stage1Scores.culture - cultCenter, 2) +
-      Math.pow(stage1Scores.authority - authCenter, 2)
+      Math.pow(adjustedScores.economic - econCenter, 2) +
+      Math.pow(adjustedScores.culture - cultCenter, 2) +
+      Math.pow(adjustedScores.authority - authCenter, 2)
     );
     
     // 距离越近，匹配质量越高（70-85%）
@@ -555,6 +644,14 @@ function calculateAllMatches() {
   // 计算所有意识形态的匹配程度
   const matches = [];
   
+  // 根据选择的模式调整分数
+  const scoreDivisor = selectedMode === '30-5' ? 2 : 1;
+  const adjustedScores = {
+    economic: stage1Scores.economic / scoreDivisor,
+    culture: stage1Scores.culture / scoreDivisor,
+    authority: stage1Scores.authority / scoreDivisor
+  };
+  
   for (const [categoryName, category] of Object.entries(ideologyCategories)) {
     const ranges = category.ranges;
     let score = 0;
@@ -565,9 +662,9 @@ function calculateAllMatches() {
     };
     
     // 检查是否在范围内
-    const inEconomicRange = stage1Scores.economic >= ranges.economic[0] && stage1Scores.economic <= ranges.economic[1];
-    const inCultureRange = stage1Scores.culture >= ranges.culture[0] && stage1Scores.culture <= ranges.culture[1];
-    const inAuthorityRange = stage1Scores.authority >= ranges.authority[0] && stage1Scores.authority <= ranges.authority[1];
+    const inEconomicRange = adjustedScores.economic >= ranges.economic[0] && adjustedScores.economic <= ranges.economic[1];
+    const inCultureRange = adjustedScores.culture >= ranges.culture[0] && adjustedScores.culture <= ranges.culture[1];
+    const inAuthorityRange = adjustedScores.authority >= ranges.authority[0] && adjustedScores.authority <= ranges.authority[1];
     
     if (inEconomicRange && inCultureRange && inAuthorityRange) {
       // 完全匹配，计算距离中心的分数
@@ -576,9 +673,9 @@ function calculateAllMatches() {
       const authCenter = (ranges.authority[0] + ranges.authority[1]) / 2;
       
       const distance = Math.sqrt(
-        Math.pow(stage1Scores.economic - econCenter, 2) +
-        Math.pow(stage1Scores.culture - cultCenter, 2) +
-        Math.pow(stage1Scores.authority - authCenter, 2)
+        Math.pow(adjustedScores.economic - econCenter, 2) +
+        Math.pow(adjustedScores.culture - cultCenter, 2) +
+        Math.pow(adjustedScores.authority - authCenter, 2)
       );
       
       score = 1000 - distance; // 距离越近分数越高
@@ -594,8 +691,8 @@ function calculateAllMatches() {
       } else {
         // 计算距离范围的程度
         const econDistance = Math.min(
-          Math.abs(stage1Scores.economic - ranges.economic[0]),
-          Math.abs(stage1Scores.economic - ranges.economic[1])
+          Math.abs(adjustedScores.economic - ranges.economic[0]),
+          Math.abs(adjustedScores.economic - ranges.economic[1])
         );
         matchDetails.economic = Math.max(0, 100 - econDistance * 10);
       }
@@ -605,8 +702,8 @@ function calculateAllMatches() {
         matchDetails.culture = 100;
       } else {
         const cultDistance = Math.min(
-          Math.abs(stage1Scores.culture - ranges.culture[0]),
-          Math.abs(stage1Scores.culture - ranges.culture[1])
+          Math.abs(adjustedScores.culture - ranges.culture[0]),
+          Math.abs(adjustedScores.culture - ranges.culture[1])
         );
         matchDetails.culture = Math.max(0, 100 - cultDistance * 10);
       }
@@ -616,8 +713,8 @@ function calculateAllMatches() {
         matchDetails.authority = 100;
       } else {
         const authDistance = Math.min(
-          Math.abs(stage1Scores.authority - ranges.authority[0]),
-          Math.abs(stage1Scores.authority - ranges.authority[1])
+          Math.abs(adjustedScores.authority - ranges.authority[0]),
+          Math.abs(adjustedScores.authority - ranges.authority[1])
         );
         matchDetails.authority = Math.max(0, 100 - authDistance * 10);
       }
@@ -789,23 +886,15 @@ function restartSurvey() {
   determinedCategory = null;
   stage2Scores.clear();
   determinedIdeology = null;
-  
-  // 重新随机选择题目
-  if (allStage1Questions.length > 0) {
-    stage1Questions = selectRandomQuestions(allStage1Questions, QUESTIONS_PER_AXIS);
-    console.log('重新选择题目:', stage1Questions.length);
-  }
-  
-  // 显示测试页面
-  document.getElementById('quizPage').style.display = 'block';
-  document.getElementById('resultPage').style.display = 'none';
-  
-  // 重新开始测试
-  loadQuestionsAndStart();
+  selectedMode = null;
   
   // 清除本地存储
   localStorage.removeItem('quizAnswers');
   localStorage.removeItem('surveyStartTime');
+  localStorage.removeItem('selectedMode');
+  
+  // 显示欢迎页面
+  showWelcomePage();
 }
 
 
